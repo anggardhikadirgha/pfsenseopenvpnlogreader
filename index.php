@@ -148,14 +148,22 @@ for ($x=0; $x<sizeof($filename); $x++) {
 			
 			//LOOP UNTUK MEMBUKA 10 FILE FILTER 
 			for ($i=0; $i<10; $i++){
-            $file       = fopen('D:\XAMPP\htdocs\jarkomfinal\include\output\filter'.$i.'.log','r') or die("Gagal membuka file!");
+				$fileout [] = "include/output/filter".$i.".log";
+				//echo $filename[$i]."<br>";
+			}
+			
+			for ($x=0; $x<sizeof($fileout); $x++) {
+			
+			
+			
+				// CONVERT FILE KE ARRAY PER BARIS STRING DARI FILE 
+				$arrFile = file($fileout[$x], FILE_IGNORE_NEW_LINES);
 			
 
-            while (!feof($file)) 
-            {
-                $arrFile[]  = fgets($file);
-            }
 
+
+
+           
             // var_dump($arrFile);
             $index = 0;
             $arrFile_jlmh = count($arrFile);
@@ -189,7 +197,6 @@ for ($x=0; $x<sizeof($filename); $x++) {
                 }
             }
 		}
-            fclose($file);
 		
             return $arrTcp;
         }
