@@ -1,28 +1,12 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Path Bootstrap CSS -->
-    <link href="include/css/bootstrap.min.css" rel="stylesheet">
-       
-    <!-- Path JS Bootstrap Bundle with Popper -->
-    <script src="include/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Data Tables untuk paging dan searching -->
-
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    
-
-
-    <title>Admin (Produk)</title>
-
-
 <?php
+echo "<br>";
+echo  "------------------------ KELOMPOK TUGAS UAS JARINGAN KOMPUTER TEO DAN PRAKTIKUM -----------------------"."<br>";
+echo "| ".			"Anggota Kelompok :"			  ."         | "."<br>";
+echo "| "."Rafli Murtadho               (152011513030)"." | "."<br>";
+echo "| "."Rizky Haris Febryansa        (152011513035)"." | "."<br>";
+echo "| "."Alisa Qathrunnada Syaihu     (152011513043)"." | "."<br>";
+echo "| "."Dirga Anggardika Ilyas B.    (152011513049)"." | "."<br>";
+echo  "------------------------------------------------------------------------------------------------------------------------------------------------------"."<br>";
 
 
 // BAGIAN MEMBUKA FILE 
@@ -36,23 +20,8 @@ for ($i=0; $i<10; $i++){
 
 for ($x=0; $x<sizeof($filename); $x++) {
 
-	echo '<div class="card bg-light mb-3" style="width:100%;">';
-	echo '<div class="card-header">'."File Ke - ".$x.'</div>';
-	echo '<div class="card-body">'; 
-	
-	  echo '<div class="table-responsive" style="overflow-x: hidden">';          
-		echo '<table id="tabelip" class="table table-hover" style="width:100%;">';
-		  echo '<thead>';
-			echo '<tr>';
-			  echo '<th> No. </th>';
-			  echo '<th> NIM / Username </th>';
-			  echo '<th> IP ASAL </th>';
-			  echo '<th> IP MASKING</th>';
-			  echo '<th> ALL IP TUJUAN </th>';
-			echo '</tr>';
-		  echo '</thead>';
-		  echo '<tbody>';
-	
+	echo "<p>--------------------------<b>FILE KE - $x</b>--------------------------</p>";
+
 	// CONVERT FILE KE ARRAY PER BARIS STRING DARI FILE 
 	$baris = file($filename[$x], FILE_IGNORE_NEW_LINES);
 
@@ -112,7 +81,7 @@ for ($x=0; $x<sizeof($filename); $x++) {
 	
 	
 		//BACA ARRAY OUTPUT DARI FUNCTION YANG MEMBACA FILE FILTER OUTPUT DAN MELAKUKAN EXPLODE
-			$arrTcp=read_file_output();
+		$arrTcp=read_file_output();
 			$arrTcp_jlmh = count($arrTcp);
 			for($i=0;$i<$arrTcp_jlmh;$i++)
 			{
@@ -121,40 +90,30 @@ for ($x=0; $x<sizeof($filename); $x++) {
 				$tujuan[$i]=$split[1];
 				// echo $ipout[$i];
 			}
-
-
-			for ($i = 0; $i < sizeof($finale); $i++) {
-              echo '<tr>';
-				echo '<td>'.$i.'</td>';
-				echo '<td>'.$finale[$i]['nim'].'</td>';
-				echo '<td>'.$finale[$i]['ipasal'].'</td>';
-				echo '<td>'.$finale[$i]['ipmask'].'</td>';
-				echo '<td>';
-					for ($j=0;$j<$arrTcp_jlmh;$j++) {
-					  if ($finale[$i]['ipmask'] === $viaout[$j]) {
-						  echo $tujuan[$j].'<br>';
-					  }
-			  		}
-				echo '</td>';
-			  echo '</tr>';
-			}
 	
 	
-		// MENCOCOKKAN DARI ARRAY UNTUK MENDAPAT IP TUJUAN	
+	
+		// MENCOCOKKAN DARI ARRAY UNTUK MENDAPAT IP TUJUAN
+
+
+
+		for ($i = 0; $i < sizeof($finale); $i++) {
+			echo "<p><b>ADDRESS KE - $i</b></p>";
+			echo "<ul>";
+			echo "NIM / NIP : "."<li>".$finale[$i]['nim']."</li>";
+			echo "IP ASAL / IP ASLI : "."<li>".$finale[$i]['ipasal']."</li>";
+			echo "IP MASKING / IP VPN : "."<li>".$finale[$i]['ipmask']."</li>";
+			echo "IP TUJUAN : "; 
+				for($j=0;$j<$arrTcp_jlmh;$j++) {
+					if($finale[$i]['ipmask'] === $viaout[$j]){
+						echo "<li>".$tujuan[$j]."</li>";
+					}
+				}
+			echo "</ul>";
+		}
 }
 
-              echo '</tbody>';
-            echo '</table>';
-          echo '</div>';
-
-        echo '</div>';
-      echo '</div>';
-
-
-
-
-
-
+	
 
 
 // ------ BAGIAN FUNCTION -------- // 
@@ -192,7 +151,11 @@ for ($x=0; $x<sizeof($filename); $x++) {
 				// CONVERT FILE KE ARRAY PER BARIS STRING DARI FILE 
 				$arrFile = file($fileout[$x], FILE_IGNORE_NEW_LINES);
 			
-   
+
+
+
+
+           
             // var_dump($arrFile);
             $index = 0;
             $arrFile_jlmh = count($arrFile);
@@ -231,28 +194,6 @@ for ($x=0; $x<sizeof($filename); $x++) {
         }
 
 // ------ AKHIR BAGIAN FUNCTION -------- // 
+
+
 ?>
-
-<script type="text/javascript" charset="utf-8">
-   $(document).ready(function () {
-    $('#tabelip').DataTable();
-});
-</script>
-
-<script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "280px";
-  document.getElementById("mySidebar").style.marginLeft = "0px";
-  document.getElementById("mySidebar").style.paddingTop = "50px";
-  document.getElementById("mySidebar").style.marginRight = "0px";
-  document.getElementById("main").style.marginLeft = "280px";
-  document.getElementById("main").style.paddingLeft = "1px";
-
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-}
-</script>
-
