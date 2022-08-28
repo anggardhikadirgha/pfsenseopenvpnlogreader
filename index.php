@@ -19,7 +19,7 @@
     
 
 
-    <title>Admin (Produk)</title>
+    <title>OpenVPN Log reader</title>
 
 
 <?php
